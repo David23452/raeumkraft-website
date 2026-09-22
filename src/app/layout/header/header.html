@@ -1,0 +1,58 @@
+<header class="header">
+  <div class="header__bar">
+    <a class="header__logo" routerLink="/" (click)="closeMenu()">
+      {{ unternehmen.name }}
+    </a>
+
+    <button
+      type="button"
+      class="header__toggle"
+      [attr.aria-expanded]="menuOpen()"
+      aria-controls="hauptnavigation"
+      (click)="toggleMenu()"
+    >
+      <span class="visually-hidden">Menü {{ menuOpen() ? 'schließen' : 'öffnen' }}</span>
+      <span class="header__toggle-icon" aria-hidden="true"></span>
+    </button>
+
+    <nav
+      id="hauptnavigation"
+      class="header__nav"
+      [class.header__nav--open]="menuOpen()"
+      aria-label="Hauptnavigation"
+    >
+      <ul class="header__nav-list">
+        <li>
+          <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
+            Startseite
+          </a>
+        </li>
+        <li>
+          <a routerLink="/leistungen" routerLinkActive="is-active" (click)="closeMenu()">
+            Leistungen
+          </a>
+        </li>
+        <li>
+          <a routerLink="/einsatzgebiete" routerLinkActive="is-active" (click)="closeMenu()">
+            Einsatzgebiete
+          </a>
+        </li>
+        <li>
+          <a routerLink="/ueber-uns" routerLinkActive="is-active" (click)="closeMenu()">
+            Über uns
+          </a>
+        </li>
+        <li>
+          <a routerLink="/kontakt" routerLinkActive="is-active" (click)="closeMenu()">
+            Kontakt
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <a class="header__phone" [href]="unternehmen.telefonHref">
+      <span aria-hidden="true">📞</span>
+      {{ unternehmen.telefon }}
+    </a>
+  </div>
+</header>

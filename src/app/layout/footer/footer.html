@@ -1,0 +1,28 @@
+<footer class="footer">
+  <div class="footer__content">
+    <div class="footer__block">
+      <p class="footer__company">{{ unternehmen.name }}</p>
+      <p>{{ unternehmen.inhaber }}</p>
+      <p>{{ unternehmen.strasse }}</p>
+      <p>{{ unternehmen.plzOrt }}</p>
+    </div>
+
+    <div class="footer__block">
+      <p>
+        <a [href]="unternehmen.telefonHref">{{ unternehmen.telefon }}</a>
+      </p>
+      <p>
+        <a [href]="'mailto:' + unternehmen.email">{{ unternehmen.email }}</a>
+      </p>
+    </div>
+
+    <nav class="footer__block" aria-label="Rechtliches">
+      <ul class="footer__links">
+        <li><a routerLink="/impressum">Impressum</a></li>
+        <li><a routerLink="/datenschutz">Datenschutz</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <p class="footer__copyright">&copy; {{ jahr }} {{ unternehmen.name }}</p>
+</footer>

@@ -53,3 +53,38 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Design services around a single responsibility
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
+
+# Räumkraft – Firmenwebsite
+
+## Unternehmen
+- Name: Raumkraft (Entrümpelung / Haushaltsauflösung)
+- Inhaber: David Goldmann
+- Adresse: Mitterndorferweg 3, 85304 Ilmmünster
+- Telefon: +49 176 73225728 | E-Mail: kontakt@raum-kraft.de
+- Einsatzgebiet: Landkreis Pfaffenhofen (60 km), außerdem Freising, Ingolstadt,
+  Dachau, Neuburg-Schrobenhausen, Eichstätt, Aichach-Friedberg, Kelheim
+
+## Ziel
+Professionelle Website zur Lead-Generierung (Anfragen per Telefon/Formular).
+Lokales SEO hat höchste Priorität.
+
+## Technik
+- Aktuelles Angular, Standalone Components, Signals
+- Prerendering (statische Ausgabe) für SEO
+- SCSS, keine schweren UI-Bibliotheken
+- Mobile first, Barrierearm, schnelle Ladezeiten
+- Jede Seite: eigener Title, Meta-Description, Canonical, strukturierte Daten
+  (LocalBusiness-Schema auf der Startseite)
+- Nur Deutsch
+
+## Seitenstruktur
+/ (Startseite)
+/leistungen + Unterseiten pro Leistung
+/einsatzgebiete + /einsatzgebiete/<landkreis>
+/ueber-uns
+/kontakt
+/impressum, /datenschutz
+
+## Arbeitsweise
+- Vor größeren Änderungen kurz den Plan nennen
+- Nach jedem Schritt `ng build` ausführen und Fehler beheben
