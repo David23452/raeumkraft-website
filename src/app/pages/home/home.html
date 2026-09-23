@@ -1,0 +1,69 @@
+<section class="home__hero">
+  <h1 class="home__hero-title">
+    Foto schicken, Festpreis erhalten: Entrümpelung ganz ohne Aufwand
+  </h1>
+  <p class="home__hero-subtitle">
+    Ein paar Handyfotos per WhatsApp reichen für Ihr Angebot. Das passt, wenn Ihnen die Zeit
+    fehlt, wenn das Schleppen zu schwer ist oder wenn Sie für jemand anderen organisieren.
+  </p>
+
+  <div class="home__hero-actions">
+    <a routerLink="/kontakt" class="button button--primary">Kostenloses Angebot anfordern</a>
+    <a
+      href="https://wa.me/4917673225728"
+      target="_blank"
+      rel="noopener"
+      class="button button--secondary"
+    >
+      Fotos per WhatsApp senden
+    </a>
+  </div>
+</section>
+
+<section class="home__gallery" aria-label="Beispielbilder abgeschlossener Entrümpelungen">
+  @for (index of [0, 1, 2, 3]; track index) {
+    <div class="home__gallery-item" role="img" aria-label="Platzhalter für ein Projektbild">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.5" />
+        <circle cx="8.5" cy="9.5" r="1.5" stroke="currentColor" stroke-width="1.5" />
+        <path
+          d="M21 16L16 11L5 20"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+  }
+</section>
+
+<section class="home__testimonials">
+  <h2 class="home__testimonials-title">Kundenstimmen</h2>
+  <p class="home__testimonials-subtitle">Das sagen unsere Kunden über uns</p>
+
+  <div class="home__testimonials-grid">
+    @for (testimonial of testimonials; track testimonial.name) {
+      <article class="testimonial-card">
+        <p class="testimonial-card__quote">{{ testimonial.quote }}</p>
+        <div class="testimonial-card__author">
+          <span class="testimonial-card__avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.5" />
+              <path
+                d="M4.5 19c1.5-3.5 5-5 7.5-5s6 1.5 7.5 5"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </svg>
+          </span>
+          <div>
+            <p class="testimonial-card__name">{{ testimonial.name }}</p>
+            <p class="testimonial-card__context">{{ testimonial.context }}</p>
+          </div>
+        </div>
+      </article>
+    }
+  </div>
+</section>

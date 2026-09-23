@@ -1,0 +1,280 @@
+// ==========================================================================
+// Räumkraft – Startseite Styling
+// Farbwerte identisch zu header.scss – bei Bedarf in eine gemeinsame
+// _tokens.scss auslagern, sobald weitere Komponenten das Brand-Maroon nutzen.
+// ==========================================================================
+
+$rk-maroon: #7a1f2b;
+$rk-text: #1a1a1a;
+$rk-text-muted: #6b6b6b;
+$rk-border: #ececec;
+$rk-card-bg: #ffffff;
+$rk-breakpoint-tablet: 900px;
+$rk-breakpoint-mobile: 600px;
+
+:host {
+  display: block;
+}
+
+// --------------------------------------------------------------------------
+// Hero
+// --------------------------------------------------------------------------
+.home__hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 96px 32px 64px;
+  text-align: center;
+}
+
+.home__hero-title {
+  margin: 0 0 24px;
+  font-size: 44px;
+  line-height: 1.15;
+  font-weight: 800;
+  color: $rk-text;
+}
+
+.home__hero-subtitle {
+  margin: 0 auto 40px;
+  max-width: 640px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: $rk-text-muted;
+}
+
+.home__hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.button--primary {
+  background: $rk-text;
+  color: #ffffff;
+  border: 1px solid $rk-text;
+
+  &:hover,
+  &:focus-visible {
+    background: lighten($rk-text, 15%);
+  }
+}
+
+.button--secondary {
+  background: #ffffff;
+  color: $rk-text;
+  border: 1px solid $rk-border;
+
+  &:hover,
+  &:focus-visible {
+    background: #f7f7f7;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Bildergalerie (Platzhalter)
+// --------------------------------------------------------------------------
+.home__gallery {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px 80px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.home__gallery-item {
+  aspect-ratio: 3 / 4;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.28);
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  &:nth-child(1) {
+    background: #b9e4d6;
+  }
+
+  &:nth-child(2) {
+    background: #f6c9a4;
+  }
+
+  &:nth-child(3) {
+    background: #c2d2f7;
+  }
+
+  &:nth-child(4) {
+    background: #d3ecac;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Kundenstimmen
+// --------------------------------------------------------------------------
+.home__testimonials {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px 96px;
+}
+
+.home__testimonials-title {
+  margin: 0 0 8px;
+  font-size: 34px;
+  font-weight: 800;
+  color: $rk-text;
+}
+
+.home__testimonials-subtitle {
+  margin: 0 0 32px;
+  font-size: 16px;
+  color: $rk-text-muted;
+}
+
+.home__testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.testimonial-card {
+  background: $rk-card-bg;
+  border: 1px solid $rk-border;
+  border-radius: 16px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.testimonial-card__quote {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: $rk-text;
+}
+
+.testimonial-card__author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial-card__avatar {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f1f1f1;
+  color: $rk-text-muted;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.testimonial-card__name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: $rk-text;
+}
+
+.testimonial-card__context {
+  margin: 0;
+  font-size: 13px;
+  color: $rk-text-muted;
+}
+
+// --------------------------------------------------------------------------
+// Tablet
+// --------------------------------------------------------------------------
+@media (max-width: $rk-breakpoint-tablet) {
+  .home__hero {
+    padding: 64px 24px 48px;
+  }
+
+  .home__hero-title {
+    font-size: 32px;
+  }
+
+  .home__hero-subtitle {
+    font-size: 16px;
+  }
+
+  .home__gallery {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 24px 56px;
+    gap: 16px;
+  }
+
+  .home__testimonials {
+    padding: 0 24px 64px;
+  }
+
+  .home__testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile
+// --------------------------------------------------------------------------
+@media (max-width: $rk-breakpoint-mobile) {
+  .home__hero {
+    padding: 48px 20px 40px;
+  }
+
+  .home__hero-title {
+    font-size: 26px;
+  }
+
+  .home__hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .home__gallery {
+    grid-template-columns: 1fr;
+    padding: 0 20px 48px;
+  }
+
+  .home__gallery-item {
+    aspect-ratio: 16 / 10;
+  }
+
+  .home__testimonials {
+    padding: 0 20px 56px;
+  }
+
+  .home__testimonials-title {
+    font-size: 26px;
+  }
+}

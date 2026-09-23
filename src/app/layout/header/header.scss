@@ -1,3 +1,186 @@
+// ==========================================================================
+// Räumkraft – Header Styling
+// Farbwerte & Maße orientieren sich am Figma-Entwurf der Startseite
+// ==========================================================================
+
+$rk-maroon: #7a1f2b;
+$rk-maroon-dark: #5c1720;
+$rk-text: #1a1a1a;
+$rk-text-muted: #6b6b6b;
+$rk-pill-bg: #f1f1f1;
+$rk-pill-bg-hover: #e6e6e6;
+$rk-border: #ececec;
+$rk-breakpoint-mobile: 900px;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #ffffff;
+  border-bottom: 1px solid $rk-border;
+}
+
+.header__bar {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+// --------------------------------------------------------------------------
+// Logo
+// --------------------------------------------------------------------------
+.header__logo {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: $rk-maroon;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  line-height: 1;
+  transition: background-color 0.15s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: $rk-maroon-dark;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Desktop-Navigation (Pill)
+// --------------------------------------------------------------------------
+.header__nav {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.header__nav-list {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  background: $rk-pill-bg;
+  border-radius: 999px;
+
+  a {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 999px;
+    color: $rk-text;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.15s ease;
+
+    &:hover,
+    &:focus-visible {
+      background: $rk-pill-bg-hover;
+    }
+
+    &.is-active {
+      background: #ffffff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Telefon-Link
+// --------------------------------------------------------------------------
+.header__phone {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid $rk-border;
+  color: $rk-text;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: $rk-pill-bg;
+    border-color: $rk-pill-bg-hover;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Hamburger-Button (nur mobil sichtbar)
+// --------------------------------------------------------------------------
+.header__toggle {
+  display: none;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 12px;
+  background: $rk-pill-bg;
+  cursor: pointer;
+  padding: 0;
+}
+
+.header__toggle-icon,
+.header__toggle-icon::before,
+.header__toggle-icon::after {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: $rk-text;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.header__toggle-icon {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  &::before {
+    top: -6px;
+  }
+
+  &::after {
+    top: 6px;
+  }
+}
+
+.header__toggle[aria-expanded='true'] .header__toggle-icon {
+  background: transparent;
+
+  &::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -10,113 +193,69 @@
   border: 0;
 }
 
-.header {
-  border-bottom: 1px solid #ddd;
-}
-
-.header__bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.75rem 1rem;
-  flex-wrap: wrap;
-}
-
-.header__logo {
-  font-weight: 700;
-  font-size: 1.25rem;
-  text-decoration: none;
-  color: inherit;
-}
-
-.header__toggle {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  background: none;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
-  cursor: pointer;
-}
-
-.header__toggle-icon {
-  display: block;
-  width: 1.25rem;
-  height: 2px;
-  background: currentColor;
-  position: relative;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: currentColor;
+// --------------------------------------------------------------------------
+// Mobile Breakpoint
+// --------------------------------------------------------------------------
+@media (max-width: $rk-breakpoint-mobile) {
+  .header__bar {
+    padding: 14px 20px;
+    flex-wrap: wrap;
   }
 
-  &::before {
-    top: -6px;
-  }
-
-  &::after {
-    top: 6px;
-  }
-}
-
-.header__nav-list {
-  display: flex;
-  gap: 1.25rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  a {
-    text-decoration: none;
-    color: inherit;
-
-    &.is-active {
-      font-weight: 700;
-      text-decoration: underline;
-    }
-  }
-}
-
-.header__phone {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  background: #1a5;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-@media (max-width: 768px) {
   .header__toggle {
-    display: inline-flex;
+    display: flex;
+    order: 2;
+    margin-left: auto;
+  }
+
+  .header__phone {
+    order: 3;
+    padding: 10px;
+    font-size: 0;
+    gap: 0;
+
+    span {
+      font-size: 18px;
+    }
   }
 
   .header__nav {
-    display: none;
-    width: 100%;
-    order: 3;
+    order: 4;
+    flex-basis: 100%;
+    justify-content: stretch;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
   }
 
   .header__nav--open {
-    display: block;
+    max-height: 400px;
+    margin-top: 12px;
   }
 
   .header__nav-list {
     flex-direction: column;
-    gap: 0.75rem;
-    padding: 1rem 0;
+    align-items: stretch;
+    width: 100%;
+    background: transparent;
+    padding: 0;
+    gap: 4px;
+
+    a {
+      padding: 14px 16px;
+      border-radius: 10px;
+
+      &.is-active {
+        box-shadow: none;
+        background: $rk-pill-bg;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .header__logo {
+    padding: 8px 12px;
+    font-size: 14px;
   }
 }
