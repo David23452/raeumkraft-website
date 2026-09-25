@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-kontakt',
+  selector: 'app-contact-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <h1>Kontakt</h1>
-    <p>Platzhalter für die Kontaktseite.</p>
-  `,
+  imports: [ContactFormComponent],
+  templateUrl: './contact-page.component.html'
 })
 export class Kontakt {}
