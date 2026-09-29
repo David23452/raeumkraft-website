@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+.kontakt-seite {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-4);
+
+  &__title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-3);
+    text-align: center;
+  }
+
+  &__lead {
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-bottom: var(--space-10);
+  }
+}

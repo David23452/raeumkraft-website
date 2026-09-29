@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Kontaktformular } from '../../shared/kontaktformular/kontaktformular';
 
 @Component({
-  selector: 'app-contact-page',
+  selector: 'app-kontakt',
+  imports: [Kontaktformular],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ContactFormComponent],
-  templateUrl: './contact-page.component.html'
+  templateUrl: './kontakt.html',
+  styleUrl: './kontakt.scss',
 })
 export class Kontakt {}
