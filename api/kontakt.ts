@@ -1,20 +1,19 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
+import { UNTERNEHMEN } from '../src/app/core/data/unternehmen';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const RECIPIENT_EMAIL = 'kontakt@raum-kraft.de';
-// Absender-Adresse: muss zu einer bei Resend verifizierten Domain gehören
-// (z. B. formular@raum-kraft.de, sobald die Domain bei Resend eingetragen ist).
+// Absender-Adresse: muss zu einer bei Resend verifizierten Domain gehören.
 const FROM_EMAIL = 'formular@raum-kraft.de';
 
-interface ContactAttachment {
+interface KontaktAnhang {
   filename: string;
   contentType: string;
   base64: string;
 }
 
-interface ContactFormPayload {
+interface KontaktAnfrage {
   beschreibung?: string;
   groesse?: string;
   zeitraum?: string;
@@ -23,7 +22,7 @@ interface ContactFormPayload {
   email: string;
   telefon: string;
   dsgvo: boolean;
-  attachments?: ContactAttachment[];
+  attachments?: KontaktAnhang[];
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -32,7 +31,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  const body = req.body as ContactFormPayload;
+  const body = req.body as KontaktAnfrage;
 
   // Serverseitige Basis-Validierung — Client-Validierung allein reicht nie als Schutz.
   if (!body?.name || !body?.email || !body?.telefon || !body?.dsgvo) {
@@ -49,7 +48,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Auf 3 Anhänge begrenzen, auch wenn das Frontend das schon tut.
   const attachments = (body.attachments ?? []).slice(0, 3).map((a) => ({
     filename: a.filename,
-    content: a.base64
+    content: a.base64,
   }));
 
   const htmlBody = `
@@ -66,11 +65,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     await resend.emails.send({
       from: FROM_EMAIL,
-      to: RECIPIENT_EMAIL,
+      to: UNTERNEHMEN.email,
       replyTo: body.email,
       subject: `Neue Kontaktanfrage von ${body.name}`,
       html: htmlBody,
-      attachments
+      attachments,
     });
 
     res.status(200).json({ success: true });
