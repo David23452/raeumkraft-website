@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@a
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { findService } from '../../data/services';
-import { findLocation } from '../../data/locations';
+import { findLocation } from '../../core/data/locations';
+import { findService, Service } from '../../core/data/services';
 
 @Component({
   selector: 'app-service-page',
