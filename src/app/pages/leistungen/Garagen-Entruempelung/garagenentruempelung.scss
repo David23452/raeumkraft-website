@@ -1,0 +1,541 @@
+// ==========================================================================
+// Räumkraft – Garagenentrümpelung (Service-Seite) Styling
+// Farbwerte identisch zu home.scss / header.scss – bei Bedarf in eine
+// gemeinsame _tokens.scss auslagern, sobald weitere Komponenten das
+// Brand-Maroon nutzen.
+// ==========================================================================
+
+$rk-maroon: #7a1f2b;
+$rk-maroon-dark: #5c1720;
+$rk-maroon-tint: #f7ebec;
+$rk-text: #1a1a1a;
+$rk-text-muted: #6b6b6b;
+$rk-border: #ececec;
+$rk-card-bg: #ffffff;
+$rk-breakpoint-tablet: 900px;
+$rk-breakpoint-mobile: 600px;
+
+:host {
+  display: block;
+}
+
+// --------------------------------------------------------------------------
+// Buttons (identisch zu home.scss)
+// --------------------------------------------------------------------------
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.button--primary {
+  background: $rk-text;
+  color: #ffffff;
+  border: 1px solid $rk-text;
+
+  &:hover,
+  &:focus-visible {
+    background: lighten($rk-text, 15%);
+  }
+}
+
+.button--secondary {
+  background: #ffffff;
+  color: $rk-text;
+  border: 1px solid $rk-border;
+
+  &:hover,
+  &:focus-visible {
+    background: #f7f7f7;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Hero
+// --------------------------------------------------------------------------
+.garage__eyebrow {
+  margin: 0 auto 16px;
+  max-width: 900px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $rk-maroon;
+}
+
+.garage__hero {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 96px 32px 64px;
+  text-align: center;
+}
+
+.garage__hero-title {
+  margin: 0 0 24px;
+  font-size: 44px;
+  line-height: 1.15;
+  font-weight: 800;
+  color: $rk-text;
+}
+
+.garage__hero-subtitle {
+  margin: 0 auto 40px;
+  max-width: 640px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: $rk-text-muted;
+}
+
+.garage__hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+// --------------------------------------------------------------------------
+// Bildergalerie (Platzhalter)
+// --------------------------------------------------------------------------
+.garage__gallery {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px 80px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.garage__gallery-item {
+  aspect-ratio: 3 / 4;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.28);
+
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  &:nth-child(1) {
+    background: #b9e4d6;
+  }
+
+  &:nth-child(2) {
+    background: #f6c9a4;
+  }
+
+  &:nth-child(3) {
+    background: #c2d2f7;
+  }
+
+  &:nth-child(4) {
+    background: #d3ecac;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Gemeinsame Section-Titel
+// --------------------------------------------------------------------------
+.garage__section-title {
+  margin: 0 0 8px;
+  font-size: 34px;
+  font-weight: 800;
+  color: $rk-text;
+  text-align: center;
+}
+
+.garage__section-subtitle {
+  margin: 0 0 40px;
+  font-size: 16px;
+  color: $rk-text-muted;
+  text-align: center;
+}
+
+// --------------------------------------------------------------------------
+// Ablauf
+// --------------------------------------------------------------------------
+.garage__ablauf {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px 96px;
+}
+
+.garage__ablauf-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.ablauf-card {
+  background: $rk-card-bg;
+  border: 1px solid $rk-border;
+  border-radius: 16px;
+  padding: 28px 24px;
+}
+
+.ablauf-card__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 16px;
+  border-radius: 999px;
+  background: $rk-maroon-tint;
+  color: $rk-maroon;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.ablauf-card__title {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 700;
+  color: $rk-text;
+}
+
+.ablauf-card__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: $rk-text-muted;
+}
+
+// --------------------------------------------------------------------------
+// Gegenstände-Übersicht
+// --------------------------------------------------------------------------
+.garage__gegenstaende {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px 96px;
+}
+
+.garage__gegenstaende-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.gegenstand-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: #f7f7f7;
+  font-size: 14px;
+  font-weight: 600;
+  color: $rk-text;
+
+  svg {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    color: $rk-maroon;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Vorteile
+// --------------------------------------------------------------------------
+.garage__vorteile {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px 96px;
+}
+
+.garage__vorteile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.vorteil-card {
+  padding: 28px 24px;
+  border-radius: 16px;
+  background: $rk-maroon-tint;
+}
+
+.vorteil-card__title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: $rk-maroon-dark;
+}
+
+.vorteil-card__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: $rk-text;
+}
+
+// --------------------------------------------------------------------------
+// Einsatzgebiete
+// --------------------------------------------------------------------------
+.garage__einsatzgebiete {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 32px 96px;
+  text-align: center;
+}
+
+.garage__einsatzgebiete-text {
+  margin: 0 0 16px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: $rk-text-muted;
+}
+
+.garage__einsatzgebiete-link {
+  font-size: 15px;
+  font-weight: 700;
+  color: $rk-maroon;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+  }
+}
+
+// --------------------------------------------------------------------------
+// FAQ
+// --------------------------------------------------------------------------
+.garage__faq {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 32px 96px;
+}
+
+.garage__faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  border: 1px solid $rk-border;
+  border-radius: 14px;
+  padding: 20px 24px;
+}
+
+.faq-item[open] .faq-item__question::before {
+  transform: rotate(45deg);
+}
+
+.faq-item__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  color: $rk-text;
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::before {
+    content: '+';
+    flex: 0 0 auto;
+    margin-left: 16px;
+    font-size: 20px;
+    font-weight: 400;
+    color: $rk-maroon;
+    transition: transform 0.15s ease;
+  }
+}
+
+.faq-item__answer {
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: $rk-text-muted;
+}
+
+// --------------------------------------------------------------------------
+// Abschluss-CTA
+// --------------------------------------------------------------------------
+.garage__cta {
+  max-width: 1280px;
+  margin: 0 auto 96px;
+  padding: 64px 32px;
+  border-radius: 24px;
+  background: $rk-maroon;
+  text-align: center;
+}
+
+.garage__cta-title {
+  margin: 0 0 12px;
+  font-size: 30px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.garage__cta-text {
+  margin: 0 auto 32px;
+  max-width: 520px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.garage__cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  .button--primary {
+    background: #ffffff;
+    color: $rk-maroon;
+    border-color: #ffffff;
+
+    &:hover,
+    &:focus-visible {
+      background: #f2e6e7;
+    }
+  }
+
+  .button--secondary {
+    background: transparent;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.5);
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Tablet
+// --------------------------------------------------------------------------
+@media (max-width: $rk-breakpoint-tablet) {
+  .garage__hero {
+    padding: 64px 24px 48px;
+  }
+
+  .garage__hero-title {
+    font-size: 32px;
+  }
+
+  .garage__hero-subtitle {
+    font-size: 16px;
+  }
+
+  .garage__gallery {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 24px 56px;
+    gap: 16px;
+  }
+
+  .garage__ablauf,
+  .garage__gegenstaende,
+  .garage__vorteile,
+  .garage__einsatzgebiete,
+  .garage__faq {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .garage__ablauf-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .garage__gegenstaende-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .garage__vorteile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .garage__cta {
+    margin-left: 24px;
+    margin-right: 24px;
+    padding: 48px 24px;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mobile
+// --------------------------------------------------------------------------
+@media (max-width: $rk-breakpoint-mobile) {
+  .garage__hero {
+    padding: 48px 20px 40px;
+  }
+
+  .garage__hero-title {
+    font-size: 26px;
+  }
+
+  .garage__hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .garage__gallery {
+    grid-template-columns: 1fr;
+    padding: 0 20px 48px;
+  }
+
+  .garage__gallery-item {
+    aspect-ratio: 16 / 10;
+  }
+
+  .garage__ablauf,
+  .garage__gegenstaende,
+  .garage__vorteile,
+  .garage__einsatzgebiete,
+  .garage__faq {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .garage__ablauf-list,
+  .garage__gegenstaende-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .garage__section-title {
+    font-size: 26px;
+  }
+
+  .garage__cta {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 40px 20px;
+  }
+
+  .garage__cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

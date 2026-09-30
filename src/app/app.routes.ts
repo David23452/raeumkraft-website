@@ -1,5 +1,8 @@
 import { Routes } from '@angular/router';
 
+import { LeistungenUebersichtComponent } from './pages/leistungen-uebersicht/leistungen-uebersicht.component';
+import { ServicePageComponent } from './pages/service-page/service-page.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -10,6 +13,13 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/leistungen/leistungen-uebersicht/leistungen-uebersicht').then(
         (m) => m.LeistungenUebersicht,
+      ),
+  },
+  {
+    path: 'leistungen/garagenentruempelung',
+    loadComponent: () =>
+      import('./pages/leistungen/Garagen-Entruempelung/garagenentruempelung').then(
+        (m) => m.Garagenentruempelung,
       ),
   },
   {
@@ -53,5 +63,19 @@ export const routes: Routes = [
   {
     path: '**',
     loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFound),
+  },
+  {
+    path: 'leistungen',
+    component: LeistungenUebersichtComponent,
+  },
+  {
+    // Generische Service-Seite ohne Ort, z.B. /leistungen/garagenentruempelung
+    path: 'leistungen/:service',
+    component: ServicePageComponent,
+  },
+  {
+    // Service + Ort kombiniert, z.B. /leistungen/garagenentruempelung/schrobenhausen
+    path: 'leistungen/:service/:ort',
+    component: ServicePageComponent,
   },
 ];

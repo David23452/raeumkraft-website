@@ -1,0 +1,108 @@
+<section class="garage__hero">
+  <p class="garage__eyebrow">Leistung</p>
+  <h1 class="garage__hero-title">Garagenentrümpelung – schnell, sauber und zum Festpreis</h1>
+  <p class="garage__hero-subtitle">
+    Vollgestellte Garage, alte Reifen, verstaubtes Werkzeug? Schicken Sie uns ein paar Fotos –
+    wir kümmern uns um den Rest. Transparent, zuverlässig und ohne böse Überraschungen.
+  </p>
+
+  <div class="garage__hero-actions">
+    <a routerLink="/kontakt" class="button button--primary">Kostenloses Angebot anfordern</a>
+    <a href="https://wa.me/4917673225728" target="_blank" rel="noopener" class="button button--secondary">
+      Fotos per WhatsApp senden
+    </a>
+  </div>
+</section>
+
+<section class="garage__gallery" aria-label="Beispielbilder abgeschlossener Garagenentrümpelungen">
+  @for (index of [0, 1, 2, 3]; track index) {
+  <div class="garage__gallery-item" role="img" aria-label="Platzhalter für ein Projektbild">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.5" />
+      <circle cx="8.5" cy="9.5" r="1.5" stroke="currentColor" stroke-width="1.5" />
+      <path d="M21 16L16 11L5 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+  </div>
+  }
+</section>
+
+<section class="garage__ablauf">
+  <h2 class="garage__section-title">So läuft Ihre Garagenentrümpelung ab</h2>
+  <p class="garage__section-subtitle">In vier einfachen Schritten zur leeren Garage</p>
+
+  <ol class="garage__ablauf-list">
+    @for (schritt of ablauf; track schritt.nummer) {
+    <li class="ablauf-card">
+      <span class="ablauf-card__number">{{ schritt.nummer }}</span>
+      <h3 class="ablauf-card__title">{{ schritt.titel }}</h3>
+      <p class="ablauf-card__text">{{ schritt.beschreibung }}</p>
+    </li>
+    }
+  </ol>
+</section>
+
+<section class="garage__gegenstaende">
+  <h2 class="garage__section-title">Was wir aus Ihrer Garage entsorgen</h2>
+  <p class="garage__section-subtitle">Eine kleine Auswahl – ganz gleich was sich angesammelt hat</p>
+
+  <ul class="garage__gegenstaende-grid">
+    @for (gegenstand of gegenstaende; track gegenstand) {
+    <li class="gegenstand-chip">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M5 12L10 17L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+      {{ gegenstand }}
+    </li>
+    }
+  </ul>
+</section>
+
+<section class="garage__vorteile">
+  <h2 class="garage__section-title">Ihre Vorteile</h2>
+
+  <div class="garage__vorteile-grid">
+    @for (vorteil of vorteile; track vorteil.titel) {
+    <article class="vorteil-card">
+      <h3 class="vorteil-card__title">{{ vorteil.titel }}</h3>
+      <p class="vorteil-card__text">{{ vorteil.beschreibung }}</p>
+    </article>
+    }
+  </div>
+</section>
+
+<section class="garage__einsatzgebiete">
+  <h2 class="garage__section-title">Garagenentrümpelung in Ihrer Nähe</h2>
+  <p class="garage__einsatzgebiete-text">
+    Wir entrümpeln Garagen im gesamten Landkreis Pfaffenhofen sowie in den Landkreisen Freising,
+    Ingolstadt, Dachau, Neuburg-Schrobenhausen, Eichstätt, Aichach-Friedberg und Kelheim.
+  </p>
+  <a routerLink="/einsatzgebiete" class="garage__einsatzgebiete-link">Alle Einsatzgebiete ansehen →</a>
+</section>
+
+<section class="garage__faq">
+  <h2 class="garage__section-title">Häufige Fragen</h2>
+
+  <div class="garage__faq-list">
+    @for (faq of faqs; track faq.frage) {
+    <details class="faq-item">
+      <summary class="faq-item__question">{{ faq.frage }}</summary>
+      <p class="faq-item__answer">{{ faq.antwort }}</p>
+    </details>
+    }
+  </div>
+</section>
+
+<section class="garage__cta">
+  <h2 class="garage__cta-title">Bereit für eine leere Garage?</h2>
+  <p class="garage__cta-text">
+    Schicken Sie uns jetzt ein paar Fotos – Sie erhalten Ihren Festpreis meist noch am selben Tag.
+  </p>
+  <div class="garage__cta-actions">
+    <a routerLink="/kontakt" class="button button--primary">Kostenloses Angebot anfordern</a>
+    <a href="https://wa.me/4917673225728" target="_blank" rel="noopener" class="button button--secondary">
+      Fotos per WhatsApp senden
+    </a>
+  </div>
+</section>

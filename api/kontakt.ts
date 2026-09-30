@@ -5,7 +5,7 @@ import { UNTERNEHMEN } from '../src/app/core/data/unternehmen';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Absender-Adresse: muss zu einer bei Resend verifizierten Domain gehören.
-const FROM_EMAIL = 'formular@raum-kraft.de';
+const FROM_EMAIL = 'formular@raeum-kraft.de';
 
 interface KontaktAnhang {
   filename: string;

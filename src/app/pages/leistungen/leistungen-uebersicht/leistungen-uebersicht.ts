@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LEISTUNGEN } from '../../../core/data/leistungen';
+import { Leistung, LEISTUNGEN } from '../../../core/data/leistungen';
 
 @Component({
   selector: 'app-leistungen-uebersicht',
@@ -18,4 +18,9 @@ import { LEISTUNGEN } from '../../../core/data/leistungen';
 })
 export class LeistungenUebersicht {
   protected readonly leistungen = LEISTUNGEN;
+
+}
+
+export function findLeistung(slug: string | null): Leistung | undefined {
+  return LEISTUNGEN.find((l) => l.slug === slug);
 }
