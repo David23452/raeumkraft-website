@@ -1,6 +1,6 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
-import { EINSATZGEBIETE } from './core/data/einsatzgebiete';
-import { LEISTUNGEN } from './core/data/leistungen';
+import { LOCATIONS } from './core/data/locations';
+import { SERVICES } from './core/data/services';
 
 export const serverRoutes: ServerRoute[] = [
   {
@@ -12,22 +12,22 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
   },
   {
-    path: 'leistungen/:slug',
+    path: 'leistungen/:service',
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
-      return LEISTUNGEN.map((leistung) => ({ slug: leistung.slug }));
+      return SERVICES.map((s) => ({ service: s.slug }));
+    },
+  },
+  {
+    path: 'leistungen/:service/:ort',
+    renderMode: RenderMode.Prerender,
+    async getPrerenderParams() {
+      return SERVICES.flatMap((s) => LOCATIONS.map((l) => ({ service: s.slug, ort: l.slug })));
     },
   },
   {
     path: 'einsatzgebiete',
     renderMode: RenderMode.Prerender,
-  },
-  {
-    path: 'einsatzgebiete/:landkreis',
-    renderMode: RenderMode.Prerender,
-    async getPrerenderParams() {
-      return EINSATZGEBIETE.map((gebiet) => ({ landkreis: gebiet.slug }));
-    },
   },
   {
     path: 'ueber-uns',

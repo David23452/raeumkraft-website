@@ -6,11 +6,12 @@ export interface Location {
   slug: string;
   name: string;
   landkreis: string;
+  /** Optionaler Ersatz für "in ${name} und Umgebung (${landkreis})" in Textbausteinen */
+  note?: string;
 }
 
 export const LOCATIONS: Location[] = [
   { slug: 'pfaffenhofen-an-der-ilm', name: 'Pfaffenhofen an der Ilm', landkreis: 'Landkreis Pfaffenhofen' },
-  { slug: 'ilmmuenster', name: 'Ilmmünster', landkreis: 'Landkreis Pfaffenhofen' },
   { slug: 'schrobenhausen', name: 'Schrobenhausen', landkreis: 'Landkreis Neuburg-Schrobenhausen' },
   { slug: 'neuburg-an-der-donau', name: 'Neuburg an der Donau', landkreis: 'Landkreis Neuburg-Schrobenhausen' },
   { slug: 'freising', name: 'Freising', landkreis: 'Landkreis Freising' },
@@ -20,6 +21,12 @@ export const LOCATIONS: Location[] = [
   { slug: 'aichach', name: 'Aichach', landkreis: 'Landkreis Aichach-Friedberg' },
   { slug: 'friedberg', name: 'Friedberg', landkreis: 'Landkreis Aichach-Friedberg' },
   { slug: 'kelheim', name: 'Kelheim', landkreis: 'Landkreis Kelheim' },
+  {
+    slug: 'umkreis-150km',
+    name: 'ganz Bayern',
+    landkreis: 'Auf Anfrage (bis 150 km)',
+    note: 'auch außerhalb der Region – auf Anfrage bis 150 km Entfernung',
+  },
 ];
 
 /**

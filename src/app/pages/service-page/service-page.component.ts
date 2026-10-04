@@ -2,17 +2,86 @@ import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Meta, Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { LOCATIONS } from '../../core/data/locations';
 import { findLocation } from '../../core/data/locations';
-import { findService, Service } from '../../core/data/services';
+import { SERVICES } from '../../core/data/services';
+import { findService } from '../../core/data/services';
+import { UNTERNEHMEN } from '../../core/data/unternehmen';
 
 @Component({
   selector: 'app-service-page',
+  imports: [RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (service(); as s) {
-      <h1>{{ headline() }}</h1>
-      <p>{{ description() }}</p>
+      <nav aria-label="Breadcrumb" class="breadcrumb">
+        <ol>
+          <li><a routerLink="/">Startseite</a></li>
+          <li><a routerLink="/leistungen">Leistungen</a></li>
+          @if (location(); as l) {
+            <li><a [routerLink]="['/leistungen', s.slug]">{{ s.name }}</a></li>
+            <li><span aria-current="page">{{ l.name }}</span></li>
+          } @else {
+            <li><span aria-current="page">{{ s.name }}</span></li>
+          }
+        </ol>
+      </nav>
+
+      <main class="service-page">
+        <h1>{{ headline() }}</h1>
+        <p class="service-page__intro">{{ introText() }}</p>
+
+        <div class="service-page__cta">
+          <a class="btn btn--primary" [href]="unternehmen.telefonHref">
+            Jetzt anrufen: {{ unternehmen.telefon }}
+          </a>
+          <a class="btn btn--secondary" routerLink="/kontakt">
+            Kostenlos anfragen
+          </a>
+        </div>
+
+        @if (location(); as l) {
+          <section class="service-page__related">
+            <h2>{{ s.name }} in anderen Orten</h2>
+            <ul>
+              @for (loc of otherLocations(); track loc.slug) {
+                <li>
+                  <a [routerLink]="['/leistungen', s.slug, loc.slug]">
+                    {{ s.name }} in {{ loc.name }}
+                  </a>
+                </li>
+              }
+            </ul>
+          </section>
+
+          <section class="service-page__related">
+            <h2>Weitere Leistungen in {{ l.name }}</h2>
+            <ul>
+              @for (svc of otherServices(); track svc.slug) {
+                <li>
+                  <a [routerLink]="['/leistungen', svc.slug, l.slug]">
+                    {{ svc.name }} in {{ l.name }}
+                  </a>
+                </li>
+              }
+            </ul>
+          </section>
+        } @else {
+          <section class="service-page__related">
+            <h2>{{ s.name }} in Ihrer Region</h2>
+            <ul>
+              @for (loc of allLocations; track loc.slug) {
+                <li>
+                  <a [routerLink]="['/leistungen', s.slug, loc.slug]">
+                    {{ s.name }} in {{ loc.name }}
+                  </a>
+                </li>
+              }
+            </ul>
+          </section>
+        }
+      </main>
     }
   `,
 })
@@ -23,11 +92,9 @@ export class ServicePageComponent {
   private readonly meta = inject(Meta);
   private readonly document = inject(DOCUMENT);
 
-  // Lernpunkt: toSignal statt route.snapshot — wandelt das paramMap-Observable
-  // in ein Signal um. Wichtig, weil Angular diese Komponente beim Navigieren
-  // zwischen z.B. .../schrobenhausen und .../freising WIEDERVERWENDET (gleiche
-  // Route-Definition), statt sie neu zu erzeugen. Ein einmaliger "Schnappschuss"
-  // (snapshot) würde dabei nicht aktualisiert werden — das Signal schon.
+  protected readonly unternehmen = UNTERNEHMEN;
+  protected readonly allLocations = LOCATIONS;
+
   private readonly params = toSignal(this.route.paramMap, { requireSync: true });
 
   protected readonly service = computed(() => findService(this.params().get('service')));
@@ -40,33 +107,39 @@ export class ServicePageComponent {
     return l ? `${s.name} in ${l.name}` : s.name;
   });
 
-  // Lernpunkt: Textbaustein mit Platzhaltern statt identischem Text je Seite —
-  // sonst stuft Google die Seiten als Duplicate/Thin Content ein.
-  protected readonly description = computed(() => {
+  protected readonly introText = computed(() => {
     const s = this.service();
     const l = this.location();
     if (!s) return '';
-    return l
-      ? `${s.kurzbeschreibung} Wir sind für dich in ${l.name} und Umgebung (${l.landkreis}) im Einsatz.`
-      : s.kurzbeschreibung;
+    const ort = l ? (l.note ?? `in ${l.name} und Umgebung (${l.landkreis})`) : 'in Bayern';
+    return `Räumkraft übernimmt für Sie die ${s.name} ${ort} – schnell, sauber und zum Festpreis. ${s.kurzbeschreibung}`;
   });
 
+  protected readonly otherLocations = computed(() =>
+    LOCATIONS.filter((l) => l.slug !== this.location()?.slug),
+  );
+
+  protected readonly otherServices = computed(() =>
+    SERVICES.filter((s) => s.slug !== this.service()?.slug),
+  );
+
   constructor() {
-    // Lernpunkt: effect() statt computed() für Title/Meta/Canonical, weil das
-    // hier Seiteneffekte sind (DOM/Browser-APIs verändern) — kein abgeleiteter
-    // Wert, den man einfach im Template anzeigen würde. computed() ist für
-    // reine, seiteneffektfreie Berechnungen gedacht.
     effect(() => {
       const s = this.service();
+      const ortParam = this.params().get('ort');
 
       if (!s) {
-        // Ungültiger Service-Slug in der URL → zurück zur Übersicht.
         this.router.navigate(['/leistungen']);
         return;
       }
 
+      if (ortParam && !this.location()) {
+        this.router.navigate(['/leistungen', s.slug]);
+        return;
+      }
+
       this.titleService.setTitle(`${this.headline()} | Räumkraft`);
-      this.meta.updateTag({ name: 'description', content: this.description() });
+      this.meta.updateTag({ name: 'description', content: this.introText() });
 
       const l = this.location();
       const canonicalPath = l ? `leistungen/${s.slug}/${l.slug}` : `leistungen/${s.slug}`;
@@ -74,8 +147,6 @@ export class ServicePageComponent {
     });
   }
 
-  // Lernpunkt: Canonical ist ein <link>-Tag im <head>, kein <meta>-Tag —
-  // deshalb reicht der Meta-Service hier nicht, wir greifen direkt aufs DOM zu.
   private setCanonicalUrl(url: string): void {
     let link = this.document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!link) {

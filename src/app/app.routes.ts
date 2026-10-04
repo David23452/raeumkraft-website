@@ -1,8 +1,5 @@
 import { Routes } from '@angular/router';
 
-import { LeistungenUebersichtComponent } from './pages/leistungen-uebersicht/leistungen-uebersicht.component';
-import { ServicePageComponent } from './pages/service-page/service-page.component';
-
 export const routes: Routes = [
   {
     path: '',
@@ -16,32 +13,23 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'leistungen/garagenentruempelung',
+    path: 'leistungen/:service',
     loadComponent: () =>
-      import('./pages/leistungen/Garagen-Entruempelung/garagenentruempelung').then(
-        (m) => m.Garagenentruempelung,
+      import('./pages/service-page/service-page.component').then(
+        (m) => m.ServicePageComponent,
       ),
   },
   {
-    path: 'leistungen/:slug',
+    path: 'leistungen/:service/:ort',
     loadComponent: () =>
-      import('./pages/leistungen/leistung-detail/leistung-detail').then(
-        (m) => m.LeistungDetail,
+      import('./pages/service-page/service-page.component').then(
+        (m) => m.ServicePageComponent,
       ),
   },
   {
     path: 'einsatzgebiete',
     loadComponent: () =>
-      import(
-        './pages/einsatzgebiete/einsatzgebiete-uebersicht/einsatzgebiete-uebersicht'
-      ).then((m) => m.EinsatzgebieteUebersicht),
-  },
-  {
-    path: 'einsatzgebiete/:landkreis',
-    loadComponent: () =>
-      import('./pages/einsatzgebiete/einsatzgebiet-detail/einsatzgebiet-detail').then(
-        (m) => m.EinsatzgebietDetail,
-      ),
+      import('./pages/einsatzgebiete/einsatzgebiete').then((m) => m.Einsatzgebiete),
   },
   {
     path: 'ueber-uns',
@@ -63,19 +51,5 @@ export const routes: Routes = [
   {
     path: '**',
     loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFound),
-  },
-  {
-    path: 'leistungen',
-    component: LeistungenUebersichtComponent,
-  },
-  {
-    // Generische Service-Seite ohne Ort, z.B. /leistungen/garagenentruempelung
-    path: 'leistungen/:service',
-    component: ServicePageComponent,
-  },
-  {
-    // Service + Ort kombiniert, z.B. /leistungen/garagenentruempelung/schrobenhausen
-    path: 'leistungen/:service/:ort',
-    component: ServicePageComponent,
   },
 ];
