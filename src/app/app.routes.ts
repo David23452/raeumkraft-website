@@ -13,25 +13,23 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'leistungen/:slug',
+    path: 'leistungen/:service',
     loadComponent: () =>
-      import('./pages/leistungen/leistung-detail/leistung-detail').then(
-        (m) => m.LeistungDetail,
+      import('./pages/service-page/service-page.component').then(
+        (m) => m.ServicePageComponent,
+      ),
+  },
+  {
+    path: 'leistungen/:service/:ort',
+    loadComponent: () =>
+      import('./pages/service-page/service-page.component').then(
+        (m) => m.ServicePageComponent,
       ),
   },
   {
     path: 'einsatzgebiete',
     loadComponent: () =>
-      import(
-        './pages/einsatzgebiete/einsatzgebiete-uebersicht/einsatzgebiete-uebersicht'
-      ).then((m) => m.EinsatzgebieteUebersicht),
-  },
-  {
-    path: 'einsatzgebiete/:landkreis',
-    loadComponent: () =>
-      import('./pages/einsatzgebiete/einsatzgebiet-detail/einsatzgebiet-detail').then(
-        (m) => m.EinsatzgebietDetail,
-      ),
+      import('./pages/einsatzgebiete/einsatzgebiete').then((m) => m.Einsatzgebiete),
   },
   {
     path: 'ueber-uns',

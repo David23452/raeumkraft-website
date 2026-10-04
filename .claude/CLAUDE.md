@@ -79,11 +79,37 @@ Lokales SEO hat höchste Priorität.
 
 ## Seitenstruktur
 / (Startseite)
-/leistungen + Unterseiten pro Leistung
-/einsatzgebiete + /einsatzgebiete/<landkreis>
+/leistungen (Übersicht aller Leistungen)
+/leistungen/:service (Service-Landingpage ohne Ort, z.B. /leistungen/garagenentruempelung)
+/leistungen/:service/:ort (Service + Standort kombiniert für lokales SEO,
+  z.B. /leistungen/garagenentruempelung/pfaffenhofen-an-der-ilm)
 /ueber-uns
 /kontakt
 /impressum, /datenschutz
+
+## Lokales SEO: Service × Standort-Seiten
+- Zwei Datenquellen als Single Source of Truth: `services.ts` (Slug, Name,
+  Kurzbeschreibung) und `locations.ts` (Slug, Name, Landkreis/Entfernung)
+- Routing: `leistungen/:service` als Parent-Route, `leistungen/:service/:ort`
+  als Kind-Route (Ort-Parameter optional) — statische Routen wie `leistungen`
+  müssen in der Routen-Liste vor den dynamischen Mustern stehen
+- Eine wiederverwendbare Komponente für beide Fälle (mit/ohne Ort); Service-
+  und Ort-Parameter per `input()` aus dem Router oder per `toSignal(route.paramMap)`
+  als Signal abonnieren (nicht nur `snapshot`, da Angular die Komponente bei
+  reinem Parameterwechsel zwischen Geschwister-Routen wiederverwendet);
+  Headline/Title/Meta-Description als `computed()` aus Service- und Ort-Signal
+  ableiten
+- Title, Meta-Description und Canonical-URL dynamisch je Kombination setzen
+  (`Title`- und `Meta`-Service)
+- Content-Textbausteine mit Platzhaltern statt identischem Text je Seite
+  verwenden, um Duplicate-/Thin-Content-Probleme zu vermeiden
+- Alle Service×Ort-Kombinationen beim Build vorab prerendern (Angular
+  Prerendering/SSG), nicht rein clientseitig rendern
+- `sitemap.xml` aus den zwei Datenquellen automatisch generieren (Build-Script)
+- Interne Verlinkung auf jeder Seite: "diese Leistung in anderen Orten" +
+  "andere Leistungen in diesem Ort" + Breadcrumbs
+- Ungültige Service-/Ort-Slugs (kein Treffer in den Datenquellen) → Redirect
+  auf die generische Service-Seite oder 404
 
 ## Arbeitsweise
 - Vor größeren Änderungen kurz den Plan nennen
