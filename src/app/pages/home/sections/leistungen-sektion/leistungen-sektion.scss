@@ -1,0 +1,118 @@
+@use '../home-section' as s;
+
+:host {
+  display: block;
+}
+
+.leistungen {
+  @include s.section;
+}
+
+.leistungen__title {
+  @include s.title;
+  margin-bottom: 32px;
+}
+
+.leistungen__grid {
+  @include s.card-grid;
+}
+
+.leistung-card {
+  @include s.card;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+
+  app-bild-platzhalter {
+    border-radius: 0;
+  }
+}
+
+.leistung-card__body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.leistung-card__title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 700;
+  color: s.$rk-text;
+}
+
+.leistung-card__text {
+  margin: 0 0 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: s.$rk-text-muted;
+}
+
+.leistung-card__link {
+  margin-top: auto;
+  font-size: 15px;
+  font-weight: 600;
+  color: s.$rk-maroon;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration-thickness: 2px;
+  }
+}
+
+// Leiste „Immer inklusive“
+.inklusive {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid s.$rk-border;
+  border-radius: 16px;
+
+  @include s.desktop {
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 24px;
+  }
+}
+
+.inklusive--optional {
+  margin-top: 12px;
+}
+
+.inklusive__label {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: s.$rk-text;
+}
+
+.inklusive__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    color: s.$rk-text;
+  }
+
+  app-icon {
+    width: 18px;
+    height: 18px;
+    color: s.$rk-maroon;
+  }
+}

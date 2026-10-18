@@ -1,0 +1,24 @@
+<section class="trust" aria-label="Unsere Versprechen">
+  <ul class="trust__list">
+    @for (punkt of punkte; track punkt.titel) {
+      <li class="trust__item">
+        <span class="trust__icon"><app-icon [name]="punkt.icon" /></span>
+        <div>
+          <p class="trust__title">{{ punkt.titel }}</p>
+          <p class="trust__text">{{ punkt.text }}</p>
+        </div>
+      </li>
+    }
+  </ul>
+
+  @if (zeigeGoogleBewertung) {
+    <p class="trust__rating">
+      <span class="trust__stars" aria-hidden="true">
+        @for (stern of [1, 2, 3, 4, 5]; track stern) {
+          <app-icon name="stern" />
+        }
+      </span>
+      {{ googleBewertung.wert }} von 5 · {{ googleBewertung.anzahl }} Google-Bewertungen
+    </p>
+  }
+</section>

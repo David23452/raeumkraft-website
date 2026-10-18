@@ -1,0 +1,76 @@
+@use '../home-section' as s;
+
+:host {
+  display: block;
+}
+
+.klein {
+  @include s.section;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+
+  @include s.desktop {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 48px;
+  }
+}
+
+.klein__title {
+  @include s.title;
+  margin-bottom: 16px;
+}
+
+.klein__text {
+  @include s.intro;
+  margin-bottom: 16px;
+}
+
+.klein__tiles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 24px 0 32px;
+  padding: 0;
+  list-style: none;
+
+  @include s.tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.klein__tile {
+  @include s.card;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: s.$rk-text;
+
+  @include s.tablet {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.klein__icon {
+  @include s.icon-circle;
+}
+
+.klein__button {
+  @include s.button;
+  @include s.button-primary;
+}
+
+.klein__hidden {
+  @include s.visually-hidden;
+}
+
+// Bild auf Mobil unter den Text, ab Desktop rechts daneben
+.klein__bild {
+  max-width: 640px;
+}

@@ -15,18 +15,40 @@
   </div>
 </section>
 
-<section class="home__gallery" aria-label="Beispielbilder abgeschlossener Entrümpelungen">
-  <div class="home__gallery-item">
-    <img ngSrc="/images/1vh.webp" alt="Abgeschlossene Entrümpelung – Projekt 1" fill priority>
+<section class="home__gallery" aria-roledescription="Karussell"
+  aria-label="Beispielbilder abgeschlossener Entrümpelungen">
+  <div class="home__gallery-viewport">
+    <div #galerieTrack class="home__gallery-track" tabindex="0" (scroll)="galerieAktualisieren()">
+      @for (bild of galerieBilder; track bild.src; let i = $index) {
+      <div class="home__gallery-item" role="group" aria-roledescription="Folie"
+        [attr.aria-label]="(i + 1) + ' von ' + galerieBilder.length">
+        <img [ngSrc]="bild.src" [alt]="bild.alt" fill [priority]="i === 0">
+      </div>
+      }
+    </div>
+
+    <button type="button" class="home__gallery-nav home__gallery-nav--prev" aria-label="Vorheriges Bild"
+      [disabled]="aktiveSeite() === 0" (click)="zuSeite(aktiveSeite() - 1)">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </button>
+    <button type="button" class="home__gallery-nav home__gallery-nav--next" aria-label="Nächstes Bild"
+      [disabled]="aktiveSeite() >= seitenAnzahl() - 1" (click)="zuSeite(aktiveSeite() + 1)">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </button>
   </div>
-  <div class="home__gallery-item">
-    <img ngSrc="/images/2vh.webp" alt="Abgeschlossene Entrümpelung – Projekt 2" fill>
-  </div>
-  <div class="home__gallery-item">
-    <img ngSrc="/images/3vh.webp" alt="Abgeschlossene Entrümpelung – Projekt 3" fill>
-  </div>
-  <div class="home__gallery-item">
-    <img ngSrc="/images/4vh.webp" alt="Abgeschlossene Entrümpelung – Projekt 4" fill>
+
+  <div class="home__gallery-dots">
+    @for (seite of seiten(); track seite) {
+    <button type="button" class="home__gallery-dot" [class.home__gallery-dot--active]="seite === aktiveSeite()"
+      [attr.aria-label]="'Zu Bild ' + (seite + 1)" [attr.aria-current]="seite === aktiveSeite() ? 'true' : null"
+      (click)="zuSeite(seite)"></button>
+    }
   </div>
 </section>
 
@@ -56,3 +78,9 @@
     }
   </div>
 </section>
+
+<app-trust-leiste />
+<app-problem-sektion />
+<app-leistungen-sektion />
+<app-kleinauftraege-sektion />
+<app-preise-sektion />

@@ -1,0 +1,64 @@
+<section class="preise" aria-labelledby="preise-titel">
+  <h2 id="preise-titel" class="preise__title">
+    Was kostet eine Entrümpelung? Wir sagen es Ihnen vorher.
+  </h2>
+  <p class="preise__intro">
+    Andere schreiben „Preis auf Anfrage“. Wir zeigen Ihnen, womit Sie rechnen können – und nach der
+    Besichtigung bekommen Sie einen schriftlichen Festpreis, der gilt.
+  </p>
+
+  <div class="preise__layout">
+    <div>
+      <div class="preise__table-wrap">
+        <table class="preise__table">
+          <caption class="preise__hidden">
+            Preisorientierung für Entrümpelungen
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Was wird geräumt?</th>
+              <th scope="col" class="preise__num">Orientierung</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (zeile of preise; track zeile.leistung) {
+              <tr>
+                <th scope="row">{{ zeile.leistung }}</th>
+                <td class="preise__num">{{ zeile.preis }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <p class="preise__small">
+        Der genaue Preis hängt von Menge, Zugänglichkeit (Stockwerk, Laufweg) und Art des Materials
+        ab. Darum besichtigen wir kostenlos oder bewerten Ihre Fotos – und nennen Ihnen danach einen
+        Festpreis. Der steht schriftlich fest, bevor wir anfangen.
+      </p>
+    </div>
+
+    <aside class="info-box">
+      <!-- TODO: Platzhalter durch echtes Foto ersetzen -->
+      <app-bild-platzhalter
+        format="1/1"
+        ton="periwinkle"
+        beschriftung="David bei der Besichtigung"
+        alt="Inhaber David Goldmann bei der Besichtigung eines Objekts"
+      />
+      <p class="info-box__text">
+        <strong>Steuer sparen:</strong> Arbeits- und Fahrtkosten können Sie als haushaltsnahe
+        Dienstleistung nach §&nbsp;35a EStG absetzen – 20&nbsp;% der Kosten, bis zu 4.000&nbsp;€ im
+        Jahr. Voraussetzung: Rechnung und Überweisung. (Keine Steuerberatung.)
+      </p>
+      @if (zeigeWertanrechnung) {
+        <p class="info-box__text">
+          <strong>Wertanrechnung:</strong> Verwertbare Möbel oder Gegenstände rechnen wir Ihnen auf
+          den Preis an.
+        </p>
+      }
+    </aside>
+  </div>
+
+  <a class="preise__button" routerLink="/kontakt">Festpreis für mein Objekt anfragen</a>
+</section>

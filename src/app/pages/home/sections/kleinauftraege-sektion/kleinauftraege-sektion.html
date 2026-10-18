@@ -1,0 +1,37 @@
+<section class="klein" aria-labelledby="klein-titel">
+  <div class="klein__content">
+    <h2 id="klein-titel" class="klein__title">„Lohnt sich das für so wenig?“ – Ja.</h2>
+    <p class="klein__text">
+      Viele Entrümpler wollen nur das ganze Haus. Bei uns müssen Sie sich nicht entschuldigen, wenn
+      es „nur“ der Keller ist. Ein Kellerabteil, zwei schwere Schränke, eine halbe Garage: Wir
+      kommen trotzdem. Zum Festpreis und ohne Mindestumsatz.
+    </p>
+    <p class="klein__text">
+      Gerade die kleinen Aufträge sind oft die, die am längsten liegen bleiben – weil man denkt,
+      dafür ruft man doch keine Firma. Doch.
+    </p>
+
+    <ul class="klein__tiles">
+      @for (beispiel of beispiele; track beispiel.text) {
+        <li class="klein__tile">
+          <span class="klein__icon"><app-icon [name]="beispiel.icon" /></span>
+          {{ beispiel.text }}
+        </li>
+      }
+    </ul>
+
+    <a class="klein__button" [href]="whatsappUrl" target="_blank" rel="noopener">
+      Kleinen Auftrag anfragen – Fotos genügen
+      <span class="klein__hidden">(öffnet WhatsApp in neuem Tab)</span>
+    </a>
+  </div>
+
+  <!-- TODO: Platzhalter durch echtes Vorher/Nachher-Foto ersetzen -->
+  <app-bild-platzhalter
+    class="klein__bild"
+    format="4/3"
+    ton="mint"
+    beschriftung="Kellerabteil vorher/nachher"
+    alt="Kellerabteil vor und nach der Entrümpelung"
+  />
+</section>

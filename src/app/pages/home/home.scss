@@ -89,19 +89,124 @@ $rk-breakpoint-mobile: 600px;
 // Bildergalerie
 // --------------------------------------------------------------------------
 .home__gallery {
+  --gallery-gap: 24px;
+  --gallery-visible: 3;
+
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 32px 80px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+}
+
+.home__gallery-viewport {
+  position: relative;
+}
+
+.home__gallery-track {
+  display: flex;
+  gap: var(--gallery-gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  border-radius: 16px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $rk-maroon;
+    outline-offset: 4px;
+  }
 }
 
 .home__gallery-item {
   position: relative;
+  flex: 0 0
+    calc((100% - (var(--gallery-visible) - 1) * var(--gallery-gap)) / var(--gallery-visible));
   aspect-ratio: 3 / 4;
   border-radius: 16px;
   overflow: hidden;
+  scroll-snap-align: start;
+  background: #f1f1f1;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.home__gallery-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid $rk-border;
+  border-radius: 50%;
+  background: #ffffff;
+  color: $rk-text;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover:not(:disabled),
+  &:focus-visible {
+    background: #f7f7f7;
+  }
+
+  &:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.home__gallery-nav--prev {
+  left: 12px;
+}
+
+.home__gallery-nav--next {
+  right: 12px;
+}
+
+.home__gallery-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  min-height: 8px;
+  margin-top: 20px;
+}
+
+.home__gallery-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: #d4d4d4;
+  cursor: pointer;
+  transition: width 0.2s ease, background-color 0.2s ease;
+
+  &--active {
+    width: 24px;
+    background: $rk-maroon;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home__gallery-track {
+    scroll-behavior: auto;
+  }
 }
 
 // --------------------------------------------------------------------------
@@ -203,9 +308,10 @@ $rk-breakpoint-mobile: 600px;
   }
 
   .home__gallery {
-    grid-template-columns: repeat(2, 1fr);
+    --gallery-gap: 16px;
+    --gallery-visible: 2;
+
     padding: 0 24px 56px;
-    gap: 16px;
   }
 
   .home__testimonials {
@@ -239,12 +345,15 @@ $rk-breakpoint-mobile: 600px;
   }
 
   .home__gallery {
-    grid-template-columns: 1fr;
+    // Nächstes Bild schaut leicht hervor, damit erkennbar ist, dass man wischen kann
+    --gallery-visible: 1.15;
+
     padding: 0 20px 48px;
   }
 
-  .home__gallery-item {
-    aspect-ratio: 16 / 10;
+  .home__gallery-nav {
+    width: 36px;
+    height: 36px;
   }
 
   .home__testimonials {

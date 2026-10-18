@@ -1,0 +1,27 @@
+<section class="problem" aria-labelledby="problem-titel">
+  <div class="problem__head">
+    <div>
+      <h2 id="problem-titel" class="problem__title">Irgendwann ist es einfach zu viel.</h2>
+      <p class="problem__intro">
+        Ein Leben lässt sich nicht an einem Wochenende wegräumen. Ob Keller, Garage oder eine ganze
+        Wohnung – die meisten Menschen, die uns anrufen, stehen vor einer dieser Situationen:
+      </p>
+    </div>
+    <!-- TODO: Platzhalter durch echtes Foto ersetzen -->
+    <app-bild-platzhalter
+      format="16/9"
+      ton="peach"
+      beschriftung="Vollgestellter Keller – Vorher"
+      alt="Vollgestellter Keller vor der Entrümpelung"
+    />
+  </div>
+
+  <div class="problem__grid">
+    @for (situation of situationen; track situation.zitat) {
+      <article class="problem-card">
+        <h3 class="problem-card__quote">{{ situation.zitat }}</h3>
+        <p class="problem-card__text">{{ situation.text }}</p>
+      </article>
+    }
+  </div>
+</section>

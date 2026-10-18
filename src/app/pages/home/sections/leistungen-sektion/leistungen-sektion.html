@@ -1,0 +1,44 @@
+<section class="leistungen" aria-labelledby="leistungen-titel">
+  <h2 id="leistungen-titel" class="leistungen__title">Was wir für Sie räumen</h2>
+
+  <div class="leistungen__grid">
+    @for (leistung of leistungen; track leistung.titel) {
+      <article class="leistung-card">
+        <!-- TODO: Platzhalter durch echtes Foto ersetzen -->
+        <app-bild-platzhalter
+          format="4/3"
+          [ton]="leistung.bild.ton"
+          [beschriftung]="leistung.bild.beschriftung"
+          [alt]="leistung.bild.alt"
+        />
+        <div class="leistung-card__body">
+          <h3 class="leistung-card__title">{{ leistung.titel }}</h3>
+          <p class="leistung-card__text">{{ leistung.text }}</p>
+          <a class="leistung-card__link" [href]="leistung.link">
+            {{ leistung.linkText }} <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+    }
+  </div>
+
+  <div class="inklusive">
+    <p class="inklusive__label">Immer inklusive:</p>
+    <ul class="inklusive__list">
+      @for (punkt of inklusive; track punkt) {
+        <li><app-icon name="haken" />{{ punkt }}</li>
+      }
+    </ul>
+  </div>
+
+  @if (zeigeOptional) {
+    <div class="inklusive inklusive--optional">
+      <p class="inklusive__label">Optional:</p>
+      <ul class="inklusive__list">
+        @for (punkt of optional; track punkt) {
+          <li><app-icon name="haken" />{{ punkt }}</li>
+        }
+      </ul>
+    </div>
+  }
+</section>

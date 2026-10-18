@@ -1,0 +1,131 @@
+@use '../home-section' as s;
+
+:host {
+  display: block;
+}
+
+.preise {
+  @include s.section;
+}
+
+.preise__title {
+  @include s.title;
+  max-width: 720px;
+  margin-bottom: 16px;
+}
+
+.preise__intro {
+  @include s.intro;
+}
+
+.preise__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+
+  @include s.desktop {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 32px;
+  }
+}
+
+.preise__table-wrap {
+  border: 1px solid s.$rk-border;
+  border-radius: 16px;
+  overflow-x: auto;
+}
+
+.preise__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.4;
+
+  @include s.tablet {
+    font-size: 15px;
+  }
+
+  th,
+  td {
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid s.$rk-border;
+
+    @include s.tablet {
+      padding: 16px 24px;
+    }
+  }
+
+  tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+
+  thead th {
+    background: s.$rk-pill-bg;
+    font-size: 13px;
+    font-weight: 600;
+    color: s.$rk-text-muted;
+  }
+
+  // Lange Wörter auf schmalen Displays trennen (weiche Trennstriche in preise.ts)
+  tbody th {
+    font-weight: 500;
+    color: s.$rk-text;
+    hyphens: auto;
+  }
+
+  // Preisspalte rechtsbündig und hervorgehoben
+  .preise__num {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  td.preise__num {
+    font-weight: 700;
+    color: s.$rk-maroon;
+  }
+}
+
+.preise__small {
+  margin: 12px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: s.$rk-text-muted;
+}
+
+.preise__hidden {
+  @include s.visually-hidden;
+}
+
+.info-box {
+  @include s.card;
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  background: s.$rk-pill-bg;
+  border-color: s.$rk-pill-bg;
+
+  @include s.tablet {
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+  }
+
+  @include s.desktop {
+    grid-template-columns: 1fr;
+  }
+}
+
+.info-box__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: s.$rk-text;
+}
+
+.preise__button {
+  @include s.button;
+  @include s.button-primary;
+}

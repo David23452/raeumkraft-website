@@ -1,0 +1,58 @@
+@use '../home-section' as s;
+
+:host {
+  display: block;
+}
+
+.problem {
+  @include s.section;
+}
+
+.problem__head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+
+  @include s.desktop {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 48px;
+  }
+}
+
+.problem__title {
+  @include s.title;
+}
+
+.problem__intro {
+  @include s.intro;
+  margin-bottom: 0;
+}
+
+.problem__grid {
+  @include s.card-grid;
+}
+
+.problem-card {
+  @include s.card;
+}
+
+// Titel als Zitat: Akzentlinie in Markenfarbe
+.problem-card__quote {
+  margin: 0 0 12px;
+  padding-left: 14px;
+  border-left: 3px solid s.$rk-maroon;
+  font-size: 17px;
+  line-height: 1.4;
+  font-weight: 700;
+  font-style: italic;
+  color: s.$rk-text;
+}
+
+.problem-card__text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: s.$rk-text-muted;
+}
